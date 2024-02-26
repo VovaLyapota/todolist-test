@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 const SharedLayout = () => {
   return (
     <>
-      <header>
+      <header className="border-b border-blue-100">
         <Navigation />
       </header>
       <main>
