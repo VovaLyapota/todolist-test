@@ -1,5 +1,6 @@
 import React, { lazy } from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import {
   Route,
   RouterProvider,
@@ -8,6 +9,8 @@ import {
 } from "react-router-dom";
 import SharedLayout from "./components/SharedLayout.tsx";
 import "./index.css";
+import { persistor, store } from "./store/store.tsx";
+import { PersistGate } from "redux-persist/integration/react";
 
 const CreateTodo = lazy(() => import("./pages/CreateTodoPage"));
 const DoneTodos = lazy(() => import("./pages/DoneTodosPage"));
@@ -25,6 +28,10 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
