@@ -20,9 +20,18 @@ export const todosSlice = createSlice({
     deleteTodo: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
+    updateTodo: (
+      state,
+      action: PayloadAction<{ id: string; changes: Partial<todoType> }>
+    ) => {
+      state.items = state.items.map((item) => {
+        if (item.id !== action.payload.id) return item;
+        return { ...item, ...action.payload.changes };
+      });
+    },
   },
 });
 
-export const { addTodo, deleteTodo } = todosSlice.actions;
+export const { addTodo, deleteTodo, updateTodo } = todosSlice.actions;
 
 export default todosSlice.reducer;

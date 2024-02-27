@@ -28,7 +28,7 @@ const Navigation = () => {
   return (
     <MaxWidthWrapper className="py-2">
       {/* Decktop and tablet nav  */}
-      <div className="hidden sm:flex justify-center gap-2">
+      <nav className="hidden sm:flex justify-center gap-2">
         {paths.map((item) => (
           <NavLink
             to={item.path}
@@ -42,10 +42,10 @@ const Navigation = () => {
             {item.title}
           </NavLink>
         ))}
-      </div>
+      </nav>
 
       {/* Mobile nav  */}
-      <div className="flex sm:hidden justify-end">
+      <nav className="flex sm:hidden justify-end">
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Menu />
@@ -62,7 +62,7 @@ const Navigation = () => {
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
+      </nav>
     </MaxWidthWrapper>
   );
 };
