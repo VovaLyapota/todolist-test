@@ -121,7 +121,7 @@ const CreateTodoForm = () => {
         /> */}
 
           <Button className="w-full" type="submit">
-            Submit
+            Create
           </Button>
         </form>
       </Form>

@@ -4,14 +4,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface todosState {
   items: todoType[];
+  filter: string;
 }
 
 const initialState: todosState = {
   items: [],
+  filter: "",
 };
 
 export const todosSlice = createSlice({
-  name: "counter",
+  name: "todos",
   initialState,
   reducers: {
     addTodo: (state, action: PayloadAction<todoType>) => {
@@ -29,9 +31,13 @@ export const todosSlice = createSlice({
         return { ...item, ...action.payload.changes };
       });
     },
+    changeFilter: (state, action: PayloadAction<string>) => {
+      state.filter = action.payload;
+    },
   },
 });
 
-export const { addTodo, deleteTodo, updateTodo } = todosSlice.actions;
+export const { addTodo, deleteTodo, updateTodo, changeFilter } =
+  todosSlice.actions;
 
 export default todosSlice.reducer;
