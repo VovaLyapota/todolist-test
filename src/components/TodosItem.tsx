@@ -111,9 +111,6 @@ const TodosItem = ({ todo }: { todo: todoType }) => {
         </div>
         {/* Desktop todo item control */}
         <div className="hidden sm:flex flex-nowrap ml-auto space-x-1">
-          {/* <Button variant="outline" className="w-fit h-fit p-1 border-blue-400">
-          <Pencil />
-        </Button> */}
           <Button
             variant="outline"
             className="w-fit h-fit p-1 border-none"

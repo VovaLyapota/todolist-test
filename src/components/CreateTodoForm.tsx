@@ -16,8 +16,10 @@ import { nanoid } from "nanoid";
 import { Textarea } from "./ui/textarea";
 import { useAppDispatch } from "@/hooks/redux";
 import { addTodo } from "@/store/todos/todosSlice";
+import { useNavigate } from "react-router-dom";
 
 const CreateTodoForm = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const form = useForm<todoType>({
@@ -31,9 +33,10 @@ const CreateTodoForm = () => {
   });
 
   const onSubmit = (values: todoType) => {
-    console.log(values);
     dispatch(addTodo(values));
     form.reset();
+
+    navigate("/");
   };
 
   return (
