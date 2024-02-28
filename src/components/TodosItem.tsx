@@ -5,7 +5,7 @@ import { deleteTodo, updateTodo } from "@/store/todos/todosSlice";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { BookOpen, MoreHorizontal, Trash } from "lucide-react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import {
@@ -46,7 +46,7 @@ const TodosItem = ({ todo }: { todo: todoType }) => {
 
     toast({
       title: completed ? "Todo is active again!" : "Todo is completed!",
-      description: "Isn`t it?",
+      description: "Isn't it?",
       action: (
         <ToastAction
           altText="Cancel"
@@ -89,10 +89,11 @@ const TodosItem = ({ todo }: { todo: todoType }) => {
               <MoreHorizontal />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem asChild>
-                <Link to={"/create"} className={DropdownItemClassname}>
-                  Edit
-                </Link>
+              <DropdownMenuItem
+                className={DropdownItemClassname}
+                onClick={() => navigate("/create", { state: todo })}
+              >
+                Edit
               </DropdownMenuItem>
               <DropdownMenuItem
                 className={DropdownItemClassname}
@@ -141,7 +142,7 @@ const TodosItem = ({ todo }: { todo: todoType }) => {
           <Button
             variant="link"
             className="p-0 text-muted-foreground"
-            onClick={() => navigate("/create")}
+            onClick={() => navigate("/create", { state: todo })}
           >
             Edit
           </Button>

@@ -12,28 +12,32 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { nanoid } from "nanoid";
-import { Textarea } from "./ui/textarea";
 import { useAppDispatch } from "@/hooks/redux";
-import { addTodo } from "@/store/todos/todosSlice";
-import { useNavigate } from "react-router-dom";
+import { addTodo, updateTodo } from "@/store/todos/todosSlice";
+import { nanoid } from "nanoid";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Textarea } from "./ui/textarea";
 
 const CreateTodoForm = () => {
+  const { state: todo } = useLocation();
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const form = useForm<todoType>({
     resolver: zodResolver(createTodoSchema),
     defaultValues: {
-      id: nanoid(),
-      title: "",
-      description: "",
-      completed: false,
+      id: todo?.id || nanoid(),
+      title: todo?.title || "",
+      description: todo?.description || "",
+      completed: todo?.completed || false,
     },
   });
 
   const onSubmit = (values: todoType) => {
-    dispatch(addTodo(values));
+    todo
+      ? dispatch(updateTodo({ id: todo.id, changes: values }))
+      : dispatch(addTodo(values));
     form.reset();
 
     navigate("/");
@@ -42,7 +46,7 @@ const CreateTodoForm = () => {
   return (
     <div className=" flex justify-center flex-col items-center mt-4 w-full">
       <h1 className="block text-center font-semibold text-2xl">
-        Create a todo!
+        {todo ? "Update" : "Create"} a todo!
       </h1>
       <Form {...form}>
         <form
@@ -124,7 +128,7 @@ const CreateTodoForm = () => {
         /> */}
 
           <Button className="w-full" type="submit">
-            Create
+            {todo ? "Update" : "Create"}
           </Button>
         </form>
       </Form>
