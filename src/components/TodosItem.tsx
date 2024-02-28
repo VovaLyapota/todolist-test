@@ -1,27 +1,41 @@
 import { useAppDispatch } from "@/hooks/redux";
+import { cn } from "@/lib/utils";
 import { todoType } from "@/schemas/createTodoSchema";
 import { deleteTodo, updateTodo } from "@/store/todos/todosSlice";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
-import { BookOpen, MoreHorizontal, Pencil, Trash } from "lucide-react";
+import { BookOpen, MoreHorizontal, Trash } from "lucide-react";
+import { useState } from "react";
+import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { Link, useNavigate } from "react-router-dom";
+
+const DropdownItemClassname =
+  "active:bg-blue-100 cursor-pointer hover:border-0 hover:bg-blue-100 rounded-sm pl-1";
 
 const TodosItem = ({ todo }: { todo: todoType }) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [shouldShowDetails, setShouldShowDetails] = useState(false);
+
   const toggleDetails = () => setShouldShowDetails((p) => !p);
+  const deleteItem = () => dispatch(deleteTodo(todo.id));
+  const updateItem = () =>
+    dispatch(
+      updateTodo({
+        id: todo.id,
+        changes: { completed: !todo.completed },
+      })
+    );
 
   return (
     <li
       className={cn(
-        "max-h-[50px] p-2 pb-1 overflow-hidden border-2 rounded-xl border-blue-400 transition-all",
+        "max-h-[50px] p-2 pb-1 overflow-hidden border-2 rounded-xl border-blue-400",
         {
           "max-h-fit": shouldShowDetails,
         }
@@ -30,15 +44,8 @@ const TodosItem = ({ todo }: { todo: todoType }) => {
       <div className="flex items-center pb-2">
         <Checkbox
           id={todo.id}
-          onClick={() =>
-            dispatch(
-              updateTodo({
-                id: todo.id,
-                changes: { completed: !todo.completed },
-              })
-            )
-          }
-          className="w-6 h-6 mr-2"
+          onClick={updateItem}
+          className="w-6 h-6 mr-2 border-2 border-blue-400  hover:border-primary data-[state=checked]:border-primary"
           checked={todo.completed}
         />
         <p className="text-2xl md:text-2xl text-ellipsis overflow-hidden whitespace-nowrap">
@@ -51,13 +58,21 @@ const TodosItem = ({ todo }: { todo: todoType }) => {
               <MoreHorizontal />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem className="active:bg-blue-100 cursor-pointer hover:border-0 hover:bg-blue-100 rounded-sm pl-1">
-                Edit
+              <DropdownMenuItem asChild>
+                <Link to={"/create"} className={DropdownItemClassname}>
+                  Edit
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="active:bg-blue-100 cursor-pointer hover:border-0 hover:bg-blue-100 rounded-sm pl-1">
+              <DropdownMenuItem
+                className={DropdownItemClassname}
+                onClick={deleteItem}
+              >
                 Delete
               </DropdownMenuItem>
-              <DropdownMenuItem className="active:bg-blue-100 cursor-pointer hover:border-0 hover:bg-blue-100 rounded-sm pl-1">
+              <DropdownMenuItem
+                className={DropdownItemClassname}
+                onClick={toggleDetails}
+              >
                 Show more
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -78,7 +93,7 @@ const TodosItem = ({ todo }: { todo: todoType }) => {
           <Button
             variant="outline"
             className="w-fit h-fit p-1 border-none"
-            onClick={() => dispatch(deleteTodo(todo.id))}
+            onClick={deleteItem}
           >
             <Trash />
           </Button>
@@ -98,7 +113,7 @@ const TodosItem = ({ todo }: { todo: todoType }) => {
           <Button
             variant="link"
             className="p-0 text-muted-foreground"
-            onClick={toggleDetails}
+            onClick={() => navigate("/create")}
           >
             Edit
           </Button>

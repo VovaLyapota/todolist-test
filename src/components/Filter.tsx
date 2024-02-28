@@ -12,7 +12,7 @@ const Filter = () => {
   return (
     <div className="w-full max-w-2xl flex gap-2 mt-4 mx-auto">
       <Input
-        className="flex-shrink-1 font-semibold border-2"
+        className="flex-shrink-1"
         placeholder={"Search a todo..."}
         onInput={(e) => {
           const { value } = e.target as HTMLInputElement;
