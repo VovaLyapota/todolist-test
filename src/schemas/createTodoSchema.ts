@@ -1,5 +1,12 @@
 import { z } from "zod";
 
+export const tags: ["school", "work", "home", "friends"] = [
+  "school",
+  "work",
+  "home",
+  "friends",
+];
+
 export const createTodoSchema = z.object({
   id: z.string(),
   title: z
@@ -10,8 +17,9 @@ export const createTodoSchema = z.object({
     .string()
     .max(200, { message: "Title must be maximum 200 charscters" }),
   completed: z.boolean(),
-  //   doTo: z.string().datetime(),
-  //   tags:
+  tags: z.array(z.enum(tags)),
 });
 
 export type todoType = z.infer<typeof createTodoSchema>;
+
+export type tagsType = todoType["tags"];

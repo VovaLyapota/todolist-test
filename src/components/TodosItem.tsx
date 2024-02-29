@@ -114,22 +114,33 @@ const TodosItem = ({ todo }: { todo: todoType }) => {
         <div className="hidden sm:flex flex-nowrap ml-auto space-x-1">
           <Button
             variant="outline"
-            className="w-fit h-fit p-1 border-none"
+            className="w-fit h-fit p-1 border-none text-muted-foreground"
             onClick={toggleDetails}
           >
             <BookOpen />
           </Button>
           <Button
             variant="outline"
-            className="w-fit h-fit p-1 border-none"
+            className="w-fit h-fit p-1 border-none text-muted-foreground"
             onClick={deleteItem}
           >
             <Trash />
           </Button>
         </div>
       </div>
+      {/* Description container */}
       <div>
         <p className="w-[80%] text-wrap">{description}</p>
+        <div className="flex mt-1 gap-2">
+          {todo.tags.map((tag) => (
+            <p
+              key={tag}
+              className="font-medium text-xs text-white bg-blue-600 rounded-full px-2 py-1"
+            >
+              #{tag}
+            </p>
+          ))}
+        </div>
         <div className="flex gap-1 items-center">
           <Button
             variant="link"

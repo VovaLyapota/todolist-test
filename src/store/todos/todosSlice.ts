@@ -1,15 +1,22 @@
-import { todoType } from "@/schemas/createTodoSchema";
+import { tagsType, todoType } from "@/schemas/createTodoSchema";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface FilterState {
+  fiteredText: string;
+  shownTags: tagsType;
+}
 export interface todosState {
   items: todoType[];
-  filter: string;
+  filter: FilterState;
 }
 
 const initialState: todosState = {
   items: [],
-  filter: "",
+  filter: {
+    fiteredText: "",
+    shownTags: [],
+  },
 };
 
 export const todosSlice = createSlice({
@@ -31,8 +38,8 @@ export const todosSlice = createSlice({
         return { ...item, ...action.payload.changes };
       });
     },
-    changeFilter: (state, action: PayloadAction<string>) => {
-      state.filter = action.payload;
+    changeFilter: (state, action: PayloadAction<Partial<FilterState>>) => {
+      state.filter = { ...state.filter, ...action.payload };
     },
   },
 });
