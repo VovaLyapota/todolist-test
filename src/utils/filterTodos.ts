@@ -3,7 +3,7 @@ import { FilterState } from "@/store/todos/todosSlice";
 
 export const filterTodos = (
   todos: todoType[],
-  { fiteredText, shownTags }: FilterState,
+  { fiteredText = "", shownTags }: FilterState,
   isCompleted: boolean
 ) => {
   return todos.filter((todo) => {
