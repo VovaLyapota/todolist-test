@@ -131,16 +131,18 @@ const TodosItem = ({ todo }: { todo: todoType }) => {
       {/* Description container */}
       <div>
         <p className="w-[80%] text-wrap">{description}</p>
-        <div className="flex mt-1 gap-2">
-          {todo.tags.map((tag) => (
-            <p
-              key={tag}
-              className="font-medium text-xs text-white bg-blue-600 rounded-full px-2 py-1"
-            >
-              #{tag}
-            </p>
-          ))}
-        </div>
+        {todo.tags ? (
+          <div className="flex mt-1 gap-2">
+            {todo.tags.map((tag) => (
+              <p
+                key={tag}
+                className="font-medium text-xs text-white bg-blue-600 rounded-full px-2 py-1"
+              >
+                #{tag}
+              </p>
+            ))}
+          </div>
+        ) : null}
         <div className="flex gap-1 items-center">
           <Button
             variant="link"
