@@ -8,8 +8,19 @@ import { filterTodos } from "@/utils/filterTodos";
 
 const DoneTodosPage = () => {
   const todos = useAppSelector(selectTodos);
-  const filter = useAppSelector(selectFilter);
-  const filteredTodos = filterTodos(todos, filter, true);
+  const { shownTags, fiteredText } = useAppSelector(selectFilter);
+  const filteredTodos = todos.filter((todo) => {
+    const isCompleted = !todo.completed;
+    const hasText = todo.title
+      .toLowerCase()
+      .includes(fiteredText.toLowerCase());
+    const hasNoPickedTags = !shownTags.length;
+    const hasPickedTags =
+      hasNoPickedTags ||
+      shownTags.some((shownTag) => todo.tags.includes(shownTag));
+
+    return isCompleted && hasText && hasPickedTags;
+  });
 
   return (
     <MaxWidthWrapper className="relative">
