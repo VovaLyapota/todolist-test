@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+# TodoFine Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple ToDoList application where users can create, delete, and edit tasks. Additionally, users can assign tags to tasks and filter tasks by their titles.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Create Tasks**: Users can create new tasks by providing a title and optional description.
+- **Delete Tasks**: Users can delete tasks they no longer need.
+- **Edit Tasks**: Users can edit existing tasks to update their title or description.
+- **Assign Tags**: Users can add tags to tasks to categorize them.
+- **Filter by Title**: Users can filter tasks by their titles to quickly find specific tasks.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A statically typed superset of JavaScript.
+- **Redux Toolkit**: An opinionated, batteries-included toolset for efficient Redux development.
+- **Tailwind CSS**: A utility-first CSS framework for creating custom designs.
+- **Shadcn UI**: A simple, modular and accessible component library for React.
+- **React Router DOM**: Declarative routing for React applications.
+- **React Hook Form**: A performant, flexible, and extensible form library for React.
+- **Lucide-React**: A collection of simply beautiful open-source icons.
+- **Redux Persist**: Persist and rehydrate a redux store.
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+1. Clone the repository:
+
+```bash
+git clone https://github.com/VovaLyapota/todolist-app.git
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
