@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { cn } from "@/lib/utils";
-import { tags } from "@/schemas/createTodoSchema";
 import { selectFilter } from "@/store/todos/todosSelectors";
 import { changeFilter } from "@/store/todos/todosSlice";
 import { Plus } from "lucide-react";
@@ -8,6 +7,13 @@ import { Link } from "react-router-dom";
 import { buttonVariants } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
+
+export const tags: ["school", "work", "home", "friends"] = [
+  "school",
+  "work",
+  "home",
+  "friends",
+];
 
 const Filter = () => {
   const dispatch = useAppDispatch();
