@@ -4,11 +4,11 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Todos from "@/components/Todos";
 import { useAppSelector } from "@/hooks/redux";
 import { selectFilter, selectTodos } from "@/store/todos/todosSelectors";
-import { filterTodos } from "@/utils/filterTodos";
 
 const DoneTodosPage = () => {
   const todos = useAppSelector(selectTodos);
   const { shownTags, fiteredText } = useAppSelector(selectFilter);
+
   const filteredTodos = todos.filter((todo) => {
     const isCompleted = !todo.completed;
     const hasText = todo.title
