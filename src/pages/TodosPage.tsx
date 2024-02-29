@@ -7,7 +7,7 @@ import { selectFilter, selectTodos } from "@/store/todos/todosSelectors";
 
 const TodosPage = () => {
   const todos = useAppSelector(selectTodos);
-  const { shownTags, fiteredText } = useAppSelector(selectFilter);
+  const { shownTags = [], fiteredText = "" } = useAppSelector(selectFilter);
   const filteredTodos = todos.filter((todo) => {
     const isCompleted = todo.completed;
     const hasText = todo.title
